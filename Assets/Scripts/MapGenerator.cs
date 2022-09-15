@@ -191,6 +191,7 @@ public struct TerrainType
 	public string name;
 	public float height;
 	public Color colour;
+	public bool isWater; //USE THIS TO TRIGGER DEATH COLLISION IN CHARACTER WHEN TOUCHING!
 }
 
 public struct MapData
