@@ -19,7 +19,7 @@
                 {
                     "name": "",
                     "id": "0660f094-348b-43cf-95ed-a286ae91a01d",
-                    "path": "<Joystick>/stick/up",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",
@@ -30,7 +30,29 @@
                 {
                     "name": "",
                     "id": "6cb4a27d-3420-4bb7-a341-8abb70f3e682",
-                    "path": "<Joystick>/stick/down",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c6e674b-afeb-40c8-a603-5d4440e96df3",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3a92669-b3dd-4113-9b3b-8f5b13ba156c",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",
