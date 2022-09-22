@@ -29,56 +29,43 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""6aa8271d-9ede-4811-9574-a664b1829c04"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""16e468d5-9051-415d-a4cd-2e8dc2b02eec"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""0660f094-348b-43cf-95ed-a286ae91a01d"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6cb4a27d-3420-4bb7-a341-8abb70f3e682"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1c6e674b-afeb-40c8-a603-5d4440e96df3"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e3a92669-b3dd-4113-9b3b-8f5b13ba156c"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
+                    ""path"": ""<Joystick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34283bc0-afe4-4724-81fd-181a5227ddea"",
+                    ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button7"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -90,6 +77,7 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
+        m_Movement_Run = m_Movement.FindAction("Run", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -150,11 +138,13 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Movement;
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_Movement_Move;
+    private readonly InputAction m_Movement_Run;
     public struct MovementActions
     {
         private @SampleCControls m_Wrapper;
         public MovementActions(@SampleCControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Movement_Move;
+        public InputAction @Run => m_Wrapper.m_Movement_Run;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -167,6 +157,9 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                @Run.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRun;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -174,6 +167,9 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
             }
         }
     }
@@ -181,5 +177,6 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
     public interface IMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }

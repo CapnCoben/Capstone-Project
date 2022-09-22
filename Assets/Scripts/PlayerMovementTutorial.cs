@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
-public class PlayerMovementTutorial : MonoBehaviour
+public class PlayerMovementTutorial : MonoBehaviour 
 {
     [Header("Movement")]
     public float moveSpeed;

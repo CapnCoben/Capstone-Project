@@ -7,56 +7,43 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "6aa8271d-9ede-4811-9574-a664b1829c04",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "16e468d5-9051-415d-a4cd-2e8dc2b02eec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "0660f094-348b-43cf-95ed-a286ae91a01d",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6cb4a27d-3420-4bb7-a341-8abb70f3e682",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1c6e674b-afeb-40c8-a603-5d4440e96df3",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e3a92669-b3dd-4113-9b3b-8f5b13ba156c",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "Hold",
-                    "processors": "",
+                    "path": "<Joystick>/stick",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
                     "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34283bc0-afe4-4724-81fd-181a5227ddea",
+                    "path": "<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button7",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
