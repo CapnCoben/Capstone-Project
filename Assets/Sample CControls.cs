@@ -50,9 +50,9 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e3a92669-b3dd-4113-9b3b-8f5b13ba156c"",
-                    ""path"": ""<Joystick>/stick"",
+                    ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/stick"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -62,10 +62,38 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""34283bc0-afe4-4724-81fd-181a5227ddea"",
                     ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button7"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""CameraControls"",
+            ""id"": ""2374046c-112c-42da-b53d-7be788e8fb78"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Value"",
+                    ""id"": ""41a1992b-27a9-4d28-a723-338707372f4b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e13406ae-f18e-4907-a767-8076931cf520"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -78,6 +106,9 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Run = m_Movement.FindAction("Run", throwIfNotFound: true);
+        // CameraControls
+        m_CameraControls = asset.FindActionMap("CameraControls", throwIfNotFound: true);
+        m_CameraControls_Newaction = m_CameraControls.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,9 +205,46 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // CameraControls
+    private readonly InputActionMap m_CameraControls;
+    private ICameraControlsActions m_CameraControlsActionsCallbackInterface;
+    private readonly InputAction m_CameraControls_Newaction;
+    public struct CameraControlsActions
+    {
+        private @SampleCControls m_Wrapper;
+        public CameraControlsActions(@SampleCControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_CameraControls_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_CameraControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraControlsActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraControlsActions instance)
+        {
+            if (m_Wrapper.m_CameraControlsActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_CameraControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public CameraControlsActions @CameraControls => new CameraControlsActions(this);
     public interface IMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+    }
+    public interface ICameraControlsActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

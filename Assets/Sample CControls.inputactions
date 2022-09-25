@@ -28,9 +28,9 @@
                 {
                     "name": "",
                     "id": "e3a92669-b3dd-4113-9b3b-8f5b13ba156c",
-                    "path": "<Joystick>/stick",
+                    "path": "<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/stick",
                     "interactions": "",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -40,10 +40,38 @@
                     "name": "",
                     "id": "34283bc0-afe4-4724-81fd-181a5227ddea",
                     "path": "<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button7",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "CameraControls",
+            "id": "2374046c-112c-42da-b53d-7be788e8fb78",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Value",
+                    "id": "41a1992b-27a9-4d28-a723-338707372f4b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e13406ae-f18e-4907-a767-8076931cf520",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

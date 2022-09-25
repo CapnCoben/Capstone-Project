@@ -11,15 +11,34 @@ public class SampleMoveScript : MonoBehaviour
 
     SampleCControls inputActions;
 
+    public InputAction moveAction;
 
     Vector2 currentMovement;
 
+    public float moveSpeed;
+    public float runMultiplyer = 1;
+
+    CharacterController cc;
+
+    new float horizontalInput;
+    new float verticalInput;
+
+    Vector3 moveDir;
+
     bool movePressed;
     bool runPressed;
+    bool runReleased;
     private void Awake()
     {
+
         inputActions = new SampleCControls();
 
+        moveAction = inputActions.Movement.Move;
+        moveAction.performed += ctx =>
+        {
+            currentMovement = ctx.ReadValue<Vector2>();
+            movePressed = currentMovement.x != 0 || currentMovement.y != 0;
+        };
 
         inputActions.Movement.Move.performed += ctx =>
         {
@@ -27,7 +46,8 @@ public class SampleMoveScript : MonoBehaviour
             movePressed = currentMovement.x != 0 || currentMovement.y != 0;
         };
 
-        inputActions.Movement.Run.performed += ctx => runPressed = ctx.ReadValueAsButton();
+        inputActions.Movement.Run.performed += ctx => runPressed = true;
+        inputActions.Movement.Run.canceled += ctx => runPressed = false;
     }
 
     private void Run_performed(InputAction.CallbackContext obj)
@@ -46,6 +66,7 @@ public class SampleMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
         isWalkingHash = Animator.StringToHash("isWalking");
@@ -55,28 +76,62 @@ public class SampleMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();
+        print(runPressed);
+        if (movePressed)
+        {
+            PlayerMove(currentMovement);
+            print(currentMovement);
+        }
     }
 
-    void PlayerMove()
+    void PlayerMove(Vector2 magnitude)
+    {
+        AnimatorLogic();
+
+        float gravity = -9.81f;
+
+
+
+        horizontalInput = magnitude.x;
+        verticalInput = magnitude.y;
+
+        moveDir =  transform.forward * verticalInput + transform.right * horizontalInput;
+        // rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Force);
+
+
+
+        if (runPressed)
+        {
+            runMultiplyer = 5f;
+        }
+        else if (!runPressed)
+        {
+            runMultiplyer = 1;
+        }
+
+        cc.Move((moveDir * moveSpeed) * runMultiplyer * Time.deltaTime);
+        print(runMultiplyer);
+    }
+
+    private void AnimatorLogic()
     {
         bool isRunning = animator.GetBool(isRunningHash);
         bool isWalking = animator.GetBool(isWalkingHash);
 
-        if(movePressed && !isWalking)
+        if (movePressed && !isWalking)
         {
             animator.SetBool(isWalkingHash, true);
         }
-        if(!movePressed && isWalking)
+        if (!movePressed && isWalking)
         {
             animator.SetBool(isWalkingHash, false);
         }
 
-        if((movePressed && runPressed) && !isRunning) 
+        if ((movePressed && runPressed) && !isRunning)
         {
             animator.SetBool(isRunningHash, true);
         }
-        if((!movePressed && !runPressed) && isRunning)
+        if ((!movePressed && !runPressed) && isRunning)
         {
             animator.SetBool(isRunningHash, false);
         }
@@ -91,4 +146,15 @@ public class SampleMoveScript : MonoBehaviour
     {
         inputActions.Movement.Disable();
     }
+}
+
+public class CameraMove
+{
+    Transform player;
+
+    bool autoRotation;
+
+    float rotSpeed = 4f;
+
+
 }

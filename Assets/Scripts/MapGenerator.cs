@@ -143,6 +143,11 @@ public class MapGenerator : MonoBehaviour
 					if (currentHeight >= regions[i].height)
 					{
 						colourMap[y * mapChunkSize + x] = regions[i].colour;
+						if(regions[i].name == "Water" || regions[i].name == "Shallow Water")
+                        {
+							regions[i].isWater = true; 
+
+                        }
 					}
 					else
 					{
