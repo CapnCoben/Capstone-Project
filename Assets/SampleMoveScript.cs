@@ -6,6 +6,8 @@ public class SampleMoveScript : MonoBehaviour
 {
     Animator animator;
 
+    private Rigidbody playerRB;
+
     int isWalkingHash;
     int isRunningHash;
 
@@ -14,53 +16,52 @@ public class SampleMoveScript : MonoBehaviour
     public InputAction moveAction;
 
     Vector2 currentMovement;
+    Vector3 playerVelocity;
 
     public float moveSpeed;
     public float runMultiplyer = 1;
 
     CharacterController cc;
 
-    new float horizontalInput;
-    new float verticalInput;
+    float horizontalInput;
+    float verticalInput;
+
+    public Transform groundCheck;
+    float groundDistance = 1;
+    public LayerMask groundMask;
 
     Vector3 moveDir;
 
     bool movePressed;
     bool runPressed;
-    bool runReleased;
+    bool jumpPressed;
+
+    float gravity = 3f;
+    public float jumpHeight = 10f;
+    private bool groundedPlayer;
+
+    private Vector2 currentImputVector;
+    private Vector2 smoothDampVelocity;
+
+    [SerializeField] private float smoothInputSpeed = .2f;
     private void Awake()
     {
 
         inputActions = new SampleCControls();
 
         moveAction = inputActions.Movement.Move;
+
         moveAction.performed += ctx =>
         {
             currentMovement = ctx.ReadValue<Vector2>();
-            movePressed = currentMovement.x != 0 || currentMovement.y != 0;
+            movePressed = currentMovement != Vector2.zero && moveAction.IsPressed();
         };
 
-        inputActions.Movement.Move.performed += ctx =>
-        {
-            currentMovement = ctx.ReadValue<Vector2>();
-            movePressed = currentMovement.x != 0 || currentMovement.y != 0;
-        };
+        inputActions.Movement.Jump.performed += ctx => jumpPressed = true;
+        inputActions.Movement.Jump.canceled += ctx => jumpPressed = false;
 
         inputActions.Movement.Run.performed += ctx => runPressed = true;
         inputActions.Movement.Run.canceled += ctx => runPressed = false;
-    }
-
-    private void Run_performed(InputAction.CallbackContext obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void Move_performed(InputAction.CallbackContext obj)
-    {
-        //vector2 check for if y is greater than 0 to move forward
-
-        //
-        throw new System.NotImplementedException();
     }
 
     // Start is called before the first frame update
@@ -68,6 +69,9 @@ public class SampleMoveScript : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        gravity = Physics.gravity.y * 2;
+
+        playerRB = GetComponent<Rigidbody>();
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
@@ -76,41 +80,74 @@ public class SampleMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(runPressed);
-        if (movePressed)
+        RaycastHit hit;
+        if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundDistance, groundMask))
+        {
+            groundedPlayer = true;
+        }
+        Debug.Log("Hey" + groundedPlayer);
+        if (moveAction.IsPressed() && groundedPlayer)
         {
             PlayerMove(currentMovement);
-            print(currentMovement);
         }
     }
 
-    void PlayerMove(Vector2 magnitude)
+    public void PlayerMove(Vector2 magnitude)
     {
         AnimatorLogic();
-
-        float gravity = -9.81f;
-
-
-
         horizontalInput = magnitude.x;
         verticalInput = magnitude.y;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+        moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
 
-        moveDir =  transform.forward * verticalInput + transform.right * horizontalInput;
-        // rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.Force);
-
-
+        playerVelocity = moveDir;
 
         if (runPressed)
         {
-            runMultiplyer = 5f;
+          runMultiplyer = 5f; 
         }
         else if (!runPressed)
         {
-            runMultiplyer = 1;
+          runMultiplyer = 1;
         }
 
-        cc.Move((moveDir * moveSpeed) * runMultiplyer * Time.deltaTime);
-        print(runMultiplyer);
+        transform.position += playerVelocity * runMultiplyer * moveSpeed * Time.deltaTime;
+        
+        //playerRB.velocity = new Vector3(playerVelocity.x, 0, playerVelocity.y) * runMultiplyer * moveSpeed * Time.deltaTime;
+
+        //horizontalInput = magnitude.x;
+        //verticalInput = magnitude.y;
+
+        //moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
+
+        //playerVelocity = moveDir.normalized;
+
+        //if (runPressed)
+        //{
+        //    runMultiplyer = 5f;
+        //}
+        //else if (!runPressed)
+        //{
+        //    runMultiplyer = 1;
+        //}
+
+        //transform.position += playerVelocity * runMultiplyer * moveSpeed * Time.deltaTime;
+
+        if (jumpPressed && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        }
+        playerVelocity.y += gravity * Time.deltaTime;
+
+        if (jumpPressed && groundedPlayer)
+        {
+            playerRB.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            groundedPlayer = false;
+            //playerAnim.SetTrigger("Jump_trig");
+        }
     }
 
     private void AnimatorLogic()
@@ -122,7 +159,7 @@ public class SampleMoveScript : MonoBehaviour
         {
             animator.SetBool(isWalkingHash, true);
         }
-        if (!movePressed && isWalking)
+        if (movePressed && isWalking)
         {
             animator.SetBool(isWalkingHash, false);
         }
@@ -131,7 +168,7 @@ public class SampleMoveScript : MonoBehaviour
         {
             animator.SetBool(isRunningHash, true);
         }
-        if ((!movePressed && !runPressed) && isRunning)
+        if ((movePressed && !runPressed) && isRunning)
         {
             animator.SetBool(isRunningHash, false);
         }
@@ -146,6 +183,23 @@ public class SampleMoveScript : MonoBehaviour
     {
         inputActions.Movement.Disable();
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        groundedPlayer = true;
+
+    //        Debug.Log("On Ground");
+    //    }
+    //    //else if (collision.gameObject.CompareTag("Water"))
+    //    //{
+    //    //    Debug.Log("Game Over!");
+    //    //    gameOver = true;
+    //    //    playerAnim.SetBool("Death_b", true);
+    //    //    playerAnim.SetInteger("DeathType_int", 1);
+    //    //}
+    //}
 }
 
 public class CameraMove

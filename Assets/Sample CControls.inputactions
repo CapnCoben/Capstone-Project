@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "6aa8271d-9ede-4811-9574-a664b1829c04",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "242ca311-0084-4420-95ad-78dceb213d28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -30,7 +39,7 @@
                     "id": "e3a92669-b3dd-4113-9b3b-8f5b13ba156c",
                     "path": "<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/stick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -46,6 +55,17 @@
                     "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88cb10a0-996e-45e5-a2c9-efb983726d41",
+                    "path": "<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -55,9 +75,9 @@
             "actions": [
                 {
                     "name": "New action",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "41a1992b-27a9-4d28-a723-338707372f4b",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -67,7 +87,7 @@
                 {
                     "name": "",
                     "id": "e13406ae-f18e-4907-a767-8076931cf520",
-                    "path": "",
+                    "path": "<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/rz",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -85,6 +85,8 @@ public class InfiniteTerrain : MonoBehaviour
 		Vector2 position;
 		Bounds bounds;
 
+	    LayerMask ground;
+
 		MeshRenderer meshRenderer;
 		MeshFilter meshFilter;
 		MeshCollider meshCollider;
@@ -110,10 +112,14 @@ public class InfiniteTerrain : MonoBehaviour
 			meshFilter = meshObject.AddComponent<MeshFilter>();
 			meshCollider = meshObject.AddComponent<MeshCollider>();
 			meshRenderer.material = material;
+			ground = LayerMask.NameToLayer("Ground");
+
 
 			meshObject.transform.position = positionV3 * scale;
 			meshObject.transform.parent = parent;
 			meshObject.transform.localScale = Vector3.one * scale;
+			meshObject.layer = ground;
+
 			SetVisible(false);
 
 			lodMeshes = new LODMesh[detailLevels.Length];
