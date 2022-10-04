@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-//namespace TanksMP
-
+namespace IBR
+{
     /// <summary>
     /// Contains several UI elements and logic for selecting/deselecting.
     /// </summary>
@@ -23,16 +23,16 @@ using UnityEngine.UI;
             //the product has not been bought yet, but it is not marked as buyable
             //on the App Store either. Meaning we hide the buy button and show the
             //select button for it directly instead.
-                
+
             select.SetActive(true);
-            
+
         }
 
         //validates the value saved on the device against the value of this product: if they match,
         //this means that we previously selected this product and reinitialize it as selected again
         void Start()
         {
-            if (PlayerPrefs.GetString(PlayerPrefs.activeCharacter) == value.ToString())
+            if (PlayerPrefs.GetString(PlayerPrefKeys.activeCharacter) == value.ToString())
                 IsSelected(true);
         }
 
@@ -45,7 +45,7 @@ using UnityEngine.UI;
         /// </summary>
         public void IsSelected(bool thisSelect)
         {
-            
+
             //if this object has been selected
             if (thisSelect)
             {
@@ -55,12 +55,12 @@ using UnityEngine.UI;
                 //in case this product is part of a group of items
                 if (toggle.group)
                 {
-                //because Toggle components on deactivated gameobjects do not receive onValueChanged events,
-                //here we implement a hacky way to deselect all other Toggles, even deactivated ones
-                CharacterSelect[] others = toggle.group.GetComponentsInChildren<CharacterSelect>(true);
+                    //because Toggle components on deactivated gameobjects do not receive onValueChanged events,
+                    //here we implement a hacky way to deselect all other Toggles, even deactivated ones
+                    CharacterSelect[] others = toggle.group.GetComponentsInChildren<CharacterSelect>(true);
                     for (int i = 0; i < others.Length; i++)
                     {
-                        //unselect the iterated product if it is not the selected product.
+                        //unselect the character if it is not the selected character.
                         if (others[i].select != null && others[i] != this)
                         {
                             others[i].IsSelected(false);
@@ -68,13 +68,13 @@ using UnityEngine.UI;
                     }
                 }
 
-                //display that this product is selected
+                //display that this character is selected
                 toggle.isOn = true;
                 select.SetActive(false);
                 if (selected) selected.SetActive(true);
 
                 //save the selection value to the device
-                PlayerPrefs.SetString(PlayerPrefs.activeCharacter);
+                PlayerPrefs.SetString(PlayerPrefKeys.activeCharacter, value.ToString());
             }
             else
             {
@@ -85,3 +85,4 @@ using UnityEngine.UI;
             }
         }
     }
+}
