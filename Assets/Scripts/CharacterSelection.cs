@@ -31,7 +31,7 @@ namespace IBR
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(PlayerPrefs.GetInt("selectedCharacter"));
+            //Debug.Log(PlayerPrefs.GetInt("selectedCharacter"));
         }
 
         public void SelectNewCharacter(int characterValue)
