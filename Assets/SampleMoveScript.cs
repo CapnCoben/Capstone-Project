@@ -10,6 +10,8 @@ public class SampleMoveScript : MonoBehaviour
 
     int isWalkingHash;
     int isRunningHash;
+    int punchHash;
+    int kickHash;
 
     SampleCControls inputActions;
 
@@ -18,8 +20,8 @@ public class SampleMoveScript : MonoBehaviour
     Vector2 currentMovement;
     Vector3 playerVelocity;
 
-    public float moveSpeed;
-    public float runMultiplyer = 1;
+    public float moveSpeed = 3;
+    public float runSpeed = 8;
 
     CharacterController cc;
 
@@ -27,23 +29,29 @@ public class SampleMoveScript : MonoBehaviour
     float verticalInput;
 
     public Transform groundCheck;
-    float groundDistance = 1;
+    float groundDistance = .5f;
     public LayerMask groundMask;
 
     Vector3 moveDir;
 
-    bool movePressed;
+    bool walkPressed;
     bool runPressed;
     bool jumpPressed;
+    bool punchPressed;
+    bool kickPressed;
 
-    float gravity = 3f;
+    float movementAnimator;
+
+    float initialJumpVelocity;
+    float maxJumpHeight;
+    float maxJumpTime;
     public float jumpHeight = 10f;
+    bool isJumping = false;
     private bool groundedPlayer;
 
-    private Vector2 currentImputVector;
-    private Vector2 smoothDampVelocity;
+    public float gravityScale = -9.81f;
+    public float gravityModifyer;
 
-    [SerializeField] private float smoothInputSpeed = .2f;
     private void Awake()
     {
 
@@ -51,17 +59,25 @@ public class SampleMoveScript : MonoBehaviour
 
         moveAction = inputActions.Movement.Move;
 
-        moveAction.performed += ctx =>
-        {
-            currentMovement = ctx.ReadValue<Vector2>();
-            movePressed = currentMovement != Vector2.zero && moveAction.IsPressed();
-        };
+        moveAction.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
+        moveAction.canceled += ctx => currentMovement = Vector2.zero;
+
+
+        walkPressed = currentMovement.x >= 0 || currentMovement.y >= 0;
 
         inputActions.Movement.Jump.performed += ctx => jumpPressed = true;
         inputActions.Movement.Jump.canceled += ctx => jumpPressed = false;
 
         inputActions.Movement.Run.performed += ctx => runPressed = true;
         inputActions.Movement.Run.canceled += ctx => runPressed = false;
+
+        inputActions.Combat.Punck.performed += ctx => punchPressed = true;
+        inputActions.Combat.Punck.canceled += ctx => punchPressed = false;
+        
+        inputActions.Combat.Kick.performed += ctx => kickPressed = true;
+        inputActions.Combat.Kick.canceled += ctx => kickPressed = false;
+
+        //SetupJump();
     }
 
     // Start is called before the first frame update
@@ -69,120 +85,134 @@ public class SampleMoveScript : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        gravity = Physics.gravity.y * 2;
+        Physics.gravity *= gravityModifyer;
 
         playerRB = GetComponent<Rigidbody>();
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
+        punchHash = Animator.StringToHash("Punch");
+        kickHash = Animator.StringToHash("Kick");
+
+        movementAnimator = Animator.StringToHash("Movement");
+        animator.SetFloat("Movement", 0);
+
+    }
+
+    private void FixedUpdate()
+    {
+       ;
     }
 
     // Update is called once per frame
     void Update()
     {
+        movementAnimator = currentMovement.magnitude;
+        AnimatorLogic();
         RaycastHit hit;
         if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundDistance, groundMask))
         {
             groundedPlayer = true;
         }
-        Debug.Log("Hey" + groundedPlayer);
-        if (moveAction.IsPressed() && groundedPlayer)
+        if (moveAction.IsPressed())
         {
             PlayerMove(currentMovement);
         }
+        JumpLogic();
+    }
+
+    void SetupJump()
+    {
+        float timeToApex = maxJumpTime / 2;
+        gravityScale = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
     public void PlayerMove(Vector2 magnitude)
     {
-        AnimatorLogic();
         horizontalInput = magnitude.x;
         verticalInput = magnitude.y;
+
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
         moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
 
-        playerVelocity = moveDir;
-
-        if (runPressed)
-        {
-          runMultiplyer = 5f; 
-        }
-        else if (!runPressed)
-        {
-          runMultiplyer = 1;
-        }
-
-        transform.position += playerVelocity * runMultiplyer * moveSpeed * Time.deltaTime;
+        float speed = runPressed ? runSpeed : moveSpeed;
+        transform.position += moveDir * speed * Time.deltaTime;
         
-        //playerRB.velocity = new Vector3(playerVelocity.x, 0, playerVelocity.y) * runMultiplyer * moveSpeed * Time.deltaTime;
+        //playerVelocity.y += gravityScale * Time.deltaTime;
+    }
 
-        //horizontalInput = magnitude.x;
-        //verticalInput = magnitude.y;
-
-        //moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
-
-        //playerVelocity = moveDir.normalized;
-
-        //if (runPressed)
-        //{
-        //    runMultiplyer = 5f;
-        //}
-        //else if (!runPressed)
-        //{
-        //    runMultiplyer = 1;
-        //}
-
-        //transform.position += playerVelocity * runMultiplyer * moveSpeed * Time.deltaTime;
-
-        if (jumpPressed && groundedPlayer)
+    private void JumpLogic()
+    {
+        if(jumpPressed && groundedPlayer == true)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-        }
-        playerVelocity.y += gravity * Time.deltaTime;
-
-        if (jumpPressed && groundedPlayer)
-        {
-            playerRB.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            playerRB.AddForce((Vector3.up * jumpHeight), ForceMode.Impulse);
             groundedPlayer = false;
-            //playerAnim.SetTrigger("Jump_trig");
+            animator.SetTrigger("Jump");
         }
+        
     }
 
     private void AnimatorLogic()
     {
+        if (walkPressed)
+        {
+            animator.SetFloat("Movement", movementAnimator);
+            Debug.Log(movementAnimator);
+        }
         bool isRunning = animator.GetBool(isRunningHash);
         bool isWalking = animator.GetBool(isWalkingHash);
+        bool punching = animator.GetBool(punchHash);
+        bool kicking = animator.GetBool(kickHash);
 
-        if (movePressed && !isWalking)
-        {
-            animator.SetBool(isWalkingHash, true);
-        }
-        if (movePressed && isWalking)
-        {
-            animator.SetBool(isWalkingHash, false);
-        }
-
-        if ((movePressed && runPressed) && !isRunning)
+        if ((runPressed) && !isRunning)
         {
             animator.SetBool(isRunningHash, true);
         }
-        if ((movePressed && !runPressed) && isRunning)
+        if ((!runPressed && isRunning))
         {
             animator.SetBool(isRunningHash, false);
         }
+        if (punchPressed)
+        {
+            if (!punching && groundedPlayer)
+            {
+                animator.SetBool(punchHash, true);
+            }
+        }
+        if (!punchPressed)
+        {
+            animator.SetBool(punchHash, false);
+        }
+        if (kickPressed)
+        {
+            if (!kicking && groundedPlayer)
+            {
+                animator.SetBool(kickHash, true);
+            }
+        }
+        if (!kickPressed)
+        {
+            animator.SetBool(kickHash, false);
+        }
+
     }
 
     private void OnEnable()
     {
         inputActions.Movement.Enable();
+        inputActions.Combat.Enable();
     }
 
     private void OnDisable()
     {
         inputActions.Movement.Disable();
+        inputActions.Combat.Disable();
     }
+
 
     //private void OnCollisionEnter(Collision collision)
     //{

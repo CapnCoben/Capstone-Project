@@ -68,6 +68,61 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b3ca902c-34de-4e00-9a53-995a07bcdeed"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9d60f514-5d91-4a87-9160-c8bc61671c10"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""93a54e3c-e347-447b-8dfa-df3e61e2485c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6ae16777-dc5b-4f72-85f9-6ce7c73a0e6f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""896243f1-f6c8-4af6-9d3e-e9df403bee08"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""34283bc0-afe4-4724-81fd-181a5227ddea"",
                     ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button7"",
@@ -80,8 +135,30 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""91a9c90b-6aaf-437c-8f8a-ec6a7a7b9825"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""88cb10a0-996e-45e5-a2c9-efb983726d41"",
                     ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""958771bf-f537-4ad0-945c-b3f6a9df65c8"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -118,6 +195,96 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Combat"",
+            ""id"": ""0f5fb751-f16e-4d1f-bd59-ac8cb276055e"",
+            ""actions"": [
+                {
+                    ""name"": ""Punck"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc57afd2-e6ab-488d-afcc-cd8ce7c0ac68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kick"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ec5ce16-2627-453f-bf3d-4c8cfe0144d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""614b06f4-cfc8-4dad-afb0-5c194ab8a4ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d67b1126-f374-475e-a079-04483381d617"",
+                    ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punck"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1abda2c-62cb-4325-9493-242ea8731312"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punck"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""103090b9-92d2-4fc1-812f-a711f3b0ea2d"",
+                    ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""504488cb-85df-409f-809c-c279dda1f05d"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc7495db-1746-4544-b764-ed7ec93eb5f4"",
+                    ""path"": ""<HID::Bensussen Deutsch & Associates,Inc.(BDA) Core (Plus) Wired Controller>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -130,6 +297,11 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
         // CameraControls
         m_CameraControls = asset.FindActionMap("CameraControls", throwIfNotFound: true);
         m_CameraControls_Newaction = m_CameraControls.FindAction("New action", throwIfNotFound: true);
+        // Combat
+        m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
+        m_Combat_Punck = m_Combat.FindAction("Punck", throwIfNotFound: true);
+        m_Combat_Kick = m_Combat.FindAction("Kick", throwIfNotFound: true);
+        m_Combat_Dodge = m_Combat.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -267,6 +439,55 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
         }
     }
     public CameraControlsActions @CameraControls => new CameraControlsActions(this);
+
+    // Combat
+    private readonly InputActionMap m_Combat;
+    private ICombatActions m_CombatActionsCallbackInterface;
+    private readonly InputAction m_Combat_Punck;
+    private readonly InputAction m_Combat_Kick;
+    private readonly InputAction m_Combat_Dodge;
+    public struct CombatActions
+    {
+        private @SampleCControls m_Wrapper;
+        public CombatActions(@SampleCControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Punck => m_Wrapper.m_Combat_Punck;
+        public InputAction @Kick => m_Wrapper.m_Combat_Kick;
+        public InputAction @Dodge => m_Wrapper.m_Combat_Dodge;
+        public InputActionMap Get() { return m_Wrapper.m_Combat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CombatActions set) { return set.Get(); }
+        public void SetCallbacks(ICombatActions instance)
+        {
+            if (m_Wrapper.m_CombatActionsCallbackInterface != null)
+            {
+                @Punck.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnPunck;
+                @Punck.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnPunck;
+                @Punck.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnPunck;
+                @Kick.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnKick;
+                @Kick.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnKick;
+                @Kick.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnKick;
+                @Dodge.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnDodge;
+            }
+            m_Wrapper.m_CombatActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Punck.started += instance.OnPunck;
+                @Punck.performed += instance.OnPunck;
+                @Punck.canceled += instance.OnPunck;
+                @Kick.started += instance.OnKick;
+                @Kick.performed += instance.OnKick;
+                @Kick.canceled += instance.OnKick;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
+            }
+        }
+    }
+    public CombatActions @Combat => new CombatActions(this);
     public interface IMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -276,5 +497,11 @@ public partial class @SampleCControls : IInputActionCollection2, IDisposable
     public interface ICameraControlsActions
     {
         void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface ICombatActions
+    {
+        void OnPunck(InputAction.CallbackContext context);
+        void OnKick(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }
