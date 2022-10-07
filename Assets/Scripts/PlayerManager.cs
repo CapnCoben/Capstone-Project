@@ -10,10 +10,31 @@ namespace IBR
     /// Player manager.
     /// Handles fire Input and Beams.
     /// </summary>
-    public class PlayerManager : MonoBehaviourPunCallbacks
+    public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         public float Health = 1f;
-        
+        //bool IsFiring;
+        #region IPunObservable implementation
+
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                // We own this player: send the others our data
+                //stream.SendNext(IsFiring);
+                stream.SendNext(Health);
+            }
+            else
+            {
+                // Network player, receive data
+                //this.IsFiring = (bool)stream.ReceiveNext();
+                this.Health = (float)stream.ReceiveNext();
+            }
+        }
+
+
+        #endregion
 
         /// <summary>
         /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
@@ -51,12 +72,36 @@ namespace IBR
         {
             if (photonView.IsMine)
             {
+                //when user presses kick or punch execute ProcessInputs() - Swap out as needed
+                //ProcessInputs();
+
                 if (Health <= 0f)
                 {
                     GameManager.Instance.LeaveRoom();
                 }
+
+
             }
         }
+
+        ///Use below function as an example for what should go here i.e. kick and punch
+        //void ProcessInputs()
+        //{
+        //    if (Input.GetButtonDown("Fire1"))
+        //    {
+        //        if (!IsFiring)
+        //        {
+        //            IsFiring = true;
+        //        }
+        //    }
+        //    if (Input.GetButtonUp("Fire1"))
+        //    {
+        //        if (IsFiring)
+        //        {
+        //            IsFiring = false;
+        //        }
+        //    }
+        //}
 
 
         #region MonoBehaviour CallBacks
@@ -102,6 +147,8 @@ namespace IBR
             // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
             Health -= 0.1f * Time.deltaTime;
         }
+
+       
         #endregion
     }
 }
