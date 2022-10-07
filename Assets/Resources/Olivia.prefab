@@ -2775,7 +2775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4882516327160729487, guid: 6c4867c94dad84208bd2dd774c06467c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4882516327160729487, guid: 6c4867c94dad84208bd2dd774c06467c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2803,7 +2803,7 @@ PrefabInstance:
       objectReference: {fileID: 693775286360858335}
     - target: {fileID: 7650167994736937339, guid: 6c4867c94dad84208bd2dd774c06467c, type: 3}
       propertyPath: screenOffset.y
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c4867c94dad84208bd2dd774c06467c, type: 3}
