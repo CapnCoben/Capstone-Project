@@ -161,7 +161,7 @@ public class SampleMoveScript : MonoBehaviour
         if (walkPressed)
         {
             animator.SetFloat("Movement", movementAnimator);
-            Debug.Log(movementAnimator);
+            //Debug.Log(movementAnimator);
         }
         bool isRunning = animator.GetBool(isRunningHash);
         bool isWalking = animator.GetBool(isWalkingHash);

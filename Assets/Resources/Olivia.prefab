@@ -1551,6 +1551,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 4169270144312483199}
   - {fileID: 7753071610423850436}
   - {fileID: 8146351799964228207}
   sceneViewId: 0
@@ -1569,6 +1570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
+  PlayerUiPrefab: {fileID: 0}
 --- !u!114 &6874783083640959427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,7 +1776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6864817675409610184
 Transform:
   m_ObjectHideFlags: 0
@@ -1796,7 +1798,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6864817675409610185}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
