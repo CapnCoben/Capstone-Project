@@ -1355,6 +1355,7 @@ GameObject:
   - component: {fileID: 5346281332506126070}
   - component: {fileID: 4169270144312483199}
   - component: {fileID: 7753071610423850436}
+  - component: {fileID: 8146351799964228207}
   m_Layer: 0
   m_Name: Olivia
   m_TagString: Untagged
@@ -1549,6 +1550,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 7753071610423850436}
+  - {fileID: 8146351799964228207}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1581,6 +1583,42 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &8146351799964228207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018448045399969799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: isWalking
+  - Type: 4
+    SynchronizeType: 1
+    Name: isRunning
+  - Type: 4
+    SynchronizeType: 1
+    Name: Punch
+  - Type: 4
+    SynchronizeType: 1
+    Name: Kick
+  - Type: 1
+    SynchronizeType: 1
+    Name: Movement
+  - Type: 9
+    SynchronizeType: 1
+    Name: Jump
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &6555982039541286262
 GameObject:
   m_ObjectHideFlags: 0
