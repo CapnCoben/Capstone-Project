@@ -1354,8 +1354,10 @@ GameObject:
   - component: {fileID: 6864817673793818690}
   - component: {fileID: 5346281332506126070}
   - component: {fileID: 4169270144312483199}
+  - component: {fileID: 6874783083640959427}
   - component: {fileID: 7753071610423850436}
   - component: {fileID: 8146351799964228207}
+  - component: {fileID: 5099740397389137984}
   m_Layer: 0
   m_Name: Olivia
   m_TagString: Untagged
@@ -1567,6 +1569,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
+--- !u!114 &6874783083640959427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018448045399969799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87693a1a6784748c3af28261a332b9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7753071610423850436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,6 +1633,23 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &5099740397389137984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018448045399969799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd08475b23aa548b7b9d28397d430b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 7
+  height: 3
+  centerOffset: {x: 0, y: 7, z: 0}
+  followOnStart: 1
+  smoothSpeed: 0.125
 --- !u!1 &6555982039541286262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,7 +1774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6864817675409610184
 Transform:
   m_ObjectHideFlags: 0
@@ -1765,7 +1796,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6864817675409610185}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

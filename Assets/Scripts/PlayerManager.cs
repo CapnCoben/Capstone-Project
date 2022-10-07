@@ -13,6 +13,50 @@ namespace IBR
     {
         public float Health = 1f;
 
+        /// <summary>
+        /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
+        /// </summary>
+        void Awake()
+        {
+            
+        }
+
+        /// <summary>
+        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
+        /// </summary>
+        void Start()
+        {
+            CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+
+            if (_cameraWork != null)
+            {
+                if (photonView.IsMine)
+                {
+                    _cameraWork.OnStartFollowing();
+                }
+            }
+            else
+            {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+            }
+        }
+
+        /// <summary>
+        /// MonoBehaviour method called on GameObject by Unity on every frame.
+        /// </summary>
+        void Update()
+        {
+            if (photonView.IsMine)
+            {
+                if (Health <= 0f)
+                {
+                    GameManager.Instance.LeaveRoom();
+                }
+            }
+        }
+
+
         #region MonoBehaviour CallBacks
 
         /// <summary>
@@ -56,31 +100,6 @@ namespace IBR
             // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
             Health -= 0.1f * Time.deltaTime;
         }
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
-        /// </summary>
-        void Awake()
-        {
-            
-        }
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity on every frame.
-        /// </summary>
-        void Update()
-        {
-            if (photonView.IsMine)
-            {
-                if (Health <= 0f)
-                {
-                    GameManager.Instance.LeaveRoom();
-                }
-            }
-        }
-
         #endregion
-
-        
     }
 }
