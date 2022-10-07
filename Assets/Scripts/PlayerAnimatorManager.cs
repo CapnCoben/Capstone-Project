@@ -3,38 +3,42 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerAnimatorManager : MonoBehaviourPun
+namespace IBR
 {
-    private Animator animator;
-
-    //#region MonoBehaviour Callbacks
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerAnimatorManager : MonoBehaviourPun
     {
-        animator = GetComponent<Animator>();
-        if (!animator)
-        {
-            Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
-        }
-    }
+        private Animator animator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
-        {
-            return;
-        }
+        //#region MonoBehaviour Callbacks
 
-        if (!animator)
+
+        // Start is called before the first frame update
+        void Start()
         {
-            return;
+            animator = GetComponent<Animator>();
+            if (!animator)
+            {
+                Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
+            }
         }
 
-        //Place User input here and animations
+        // Update is called once per frame
+        void Update()
+        {
+            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+            {
+                return;
+            }
 
-        
+            if (!animator)
+            {
+                return;
+            }
+
+            //Place User input here and animations
+
+
+        }
     }
 }
+
