@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
 using System.Collections;
+using Photon.Pun.Demo.PunBasics;
 
 namespace IBR
 {
@@ -12,6 +13,7 @@ namespace IBR
     public class PlayerManager : MonoBehaviourPunCallbacks
     {
         public float Health = 1f;
+        
 
         /// <summary>
         /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
