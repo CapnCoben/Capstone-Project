@@ -105,10 +105,11 @@ namespace IBR
                 //when user presses kick or punch execute ProcessInputs() - Swap out as needed
                 //ProcessInputs();
 
-                if (Health <= 0f)
-                {
-                    GameManager.Instance.LeaveRoom();
-                }
+                //causing scene to end!!!!
+                //if (Health <= 0f)
+                //{
+                    //GameManager.Instance.LeaveRoom();
+                //}
 
             }
             
@@ -142,7 +143,7 @@ namespace IBR
         /// Note: when jumping and firing at the same, you'll find that the player's own beam intersects with itself
         /// One could move the collider further away to prevent this or check if the beam belongs to the player.
         /// </summary>
-        void OnTriggerEnter(Collider Player)
+        void OnTriggerEnter(Collider other)
         {
             if (!photonView.IsMine)
             {
@@ -161,7 +162,7 @@ namespace IBR
         /// We're going to affect health while the beams are touching the player
         /// </summary>
         /// <param name="other">Other.</param>
-        void OnTriggerStay(Collider Player)
+        void OnTriggerStay(Collider other)
         {
             // we dont' do anything if we are not the local player.
             if (!photonView.IsMine)

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5050903364379262859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b80b260f32e04f74a5b019b09fa3b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenOffset: {x: 0, y: 30, z: 0}
   playerNameText: {fileID: 1427541060593912338}
   playerHealthSlider: {fileID: 4882516327160729486}
 --- !u!1 &4882516327357184251
