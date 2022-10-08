@@ -1651,7 +1651,7 @@ MonoBehaviour:
   distance: 7
   height: 3
   centerOffset: {x: 0, y: 7, z: 0}
-  followOnStart: 0
+  followOnStart: 1
   smoothSpeed: 0.125
 --- !u!1 &6555982039541286262
 GameObject:
