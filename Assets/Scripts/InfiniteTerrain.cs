@@ -25,7 +25,7 @@ public class InfiniteTerrain : MonoBehaviour
 	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
-    private void Awake()
+    void Start()
     {
 		mapGenerator = FindObjectOfType<MapGenerator>();
 
