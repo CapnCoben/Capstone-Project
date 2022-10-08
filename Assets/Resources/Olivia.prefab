@@ -2798,6 +2798,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7650167994736937339, guid: 6c4867c94dad84208bd2dd774c06467c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650167994736937339, guid: 6c4867c94dad84208bd2dd774c06467c, type: 3}
       propertyPath: playerNameText
       value: 
       objectReference: {fileID: 693775286360858335}
