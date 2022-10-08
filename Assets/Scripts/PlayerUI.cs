@@ -58,25 +58,27 @@ namespace IBR
                 return;
             }
 
-            void LateUpdate()
+            
+
+        }
+
+        void LateUpdate()
+        {
+            // Do not show the UI if we are not visible to the camera, thus avoid potential bugs with seeing the UI, but not the player itself.
+            if (targetRenderer != null)
             {
-                // Do not show the UI if we are not visible to the camera, thus avoid potential bugs with seeing the UI, but not the player itself.
-                if (targetRenderer != null)
-                {
-                    this._canvasGroup.alpha = targetRenderer.isVisible ? 1f : 0f;
-                }
-
-
-                // #Critical
-                // Follow the Target GameObject on screen.
-                if (targetTransform != null)
-                {
-                    targetPosition = targetTransform.position;
-                    targetPosition.y += characterControllerHeight;
-                    this.transform.position = Camera.main.WorldToScreenPoint(targetPosition) + screenOffset;
-                }
+                this._canvasGroup.alpha = targetRenderer.isVisible ? 1f : 0f;
             }
 
+
+            // #Critical
+            // Follow the Target GameObject on screen.
+            if (targetTransform != null)
+            {
+                targetPosition = targetTransform.position;
+                targetPosition.y += characterControllerHeight;
+                this.transform.position = Camera.main.WorldToScreenPoint(targetPosition) + screenOffset;
+            }
         }
 
         #endregion
