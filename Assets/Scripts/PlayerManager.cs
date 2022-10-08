@@ -65,19 +65,19 @@ namespace IBR
         /// </summary>
         void Start()
         {
-            CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+            //CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
 
-            if (_cameraWork != null)
-            {
-                if (photonView.IsMine)
-                {
-                    _cameraWork.OnStartFollowing();
-                }
-            }
-            else
-            {
-                Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-            }
+            //if (_cameraWork != null)
+            //{
+            //    if (photonView.IsMine)
+            //    {
+            //        _cameraWork.OnStartFollowing();
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+            //}
 
             if (PlayerUiPrefab != null)
             {
