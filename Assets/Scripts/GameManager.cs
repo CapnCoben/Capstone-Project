@@ -76,7 +76,7 @@ namespace IBR
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
+                PhotonNetwork.Disconnect();
                 LoadArena();
             }
         }
@@ -106,7 +106,7 @@ namespace IBR
                 return;
             }
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
+            PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.PlayerCount);
         }
 
 

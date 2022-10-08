@@ -25,26 +25,34 @@ public class InfiniteTerrain : MonoBehaviour
 	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
 
-	void Start()
-	{
+    private void Awake()
+    {
 		mapGenerator = FindObjectOfType<MapGenerator>();
+
+		//Debug.Log("mapGenerator is " + mapGenerator);
 
 		maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
 		chunkSize = MapGenerator.mapChunkSize - 1;
 		chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
 		UpdateVisibleChunks();
+
+		viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
+
+		DontDestroyOnLoad(this.gameObject);
+
 	}
 
 	void Update()
 	{
-		viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
+		//viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
 
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
 		{
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks();
 		}
+
 	}
 
 	void UpdateVisibleChunks()
@@ -101,6 +109,7 @@ public class InfiniteTerrain : MonoBehaviour
 
 		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material)
 		{
+			//Debug.Log("Creating Terrain Chunk");
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -205,6 +214,8 @@ public class InfiniteTerrain : MonoBehaviour
 
 		public void SetVisible(bool visible)
 		{
+			//Debug.Log(meshObject);
+
 			meshObject.SetActive(visible);
 		}
 
