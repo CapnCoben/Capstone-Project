@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 6864817675409610189}
+  m_Camera: {fileID: 0}
 --- !u!114 &6864817673793818690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,7 +1651,7 @@ MonoBehaviour:
   distance: 7
   height: 3
   centerOffset: {x: 0, y: 7, z: 0}
-  followOnStart: 1
+  followOnStart: 0
   smoothSpeed: 0.125
 --- !u!1 &6555982039541286262
 GameObject:
