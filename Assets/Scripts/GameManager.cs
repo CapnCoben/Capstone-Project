@@ -53,7 +53,7 @@ namespace IBR
             SceneManager.LoadScene(0);
         }
 
-        public void OnPlayerEnteredRoom(Player other)
+        public override void OnPlayerEnteredRoom(Photon.Realtime.Player other)
         {
             //Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
 
@@ -62,13 +62,12 @@ namespace IBR
             {
                 Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
-
                 LoadArena();
             }
         }
 
 
-        public void OnPlayerLeftRoom(Player other)
+        public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
         {
             //Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
 
@@ -76,7 +75,6 @@ namespace IBR
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
 
                 LoadArena();
             }
@@ -87,10 +85,10 @@ namespace IBR
 
         #region Public Methods
 
-
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
+            
         }
 
 
