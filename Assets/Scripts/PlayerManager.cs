@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 
 namespace IBR
 {
@@ -56,7 +57,21 @@ namespace IBR
         /// </summary>
         void Start()
         {
-            
+            CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+
+            if (_cameraWork != null)
+            {
+                if (photonView.IsMine)
+                {
+                    _cameraWork.OnStartFollowing();
+                }
+            }
+            else
+            {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+            }
+
             if (PlayerUiPrefab != null)
             {
                 GameObject _uiGo = Instantiate(PlayerUiPrefab);
