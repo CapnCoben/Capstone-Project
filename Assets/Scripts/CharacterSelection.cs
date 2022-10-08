@@ -22,16 +22,15 @@ namespace IBR
                 Instance = this;
             }
         }
-        // Start is called before the first frame update
+
         void Start()
         {
             PlayerPrefs.SetInt("selectedCharacter", selectedCharacterValue);
         }
 
-        // Update is called once per frame
         void Update()
         {
-            //Debug.Log(PlayerPrefs.GetInt("selectedCharacter"));
+            
         }
 
         public void SelectNewCharacter(int characterValue)
