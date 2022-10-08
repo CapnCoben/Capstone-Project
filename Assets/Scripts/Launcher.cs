@@ -4,7 +4,6 @@ using Photon.Realtime;
 
 namespace IBR
 {
-   
 
     public class Launcher : MonoBehaviourPunCallbacks
     {
@@ -20,31 +19,22 @@ namespace IBR
         /// <summary>
         /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
         /// </summary>
-        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
 
         #endregion
 
-
         #region Private Fields
-
 
         /// <summary>
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
         string gameVersion = "1";
 
-
         #endregion
-
 
         #region MonoBehaviour CallBacks
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
-        /// </summary>
         void Awake()
         {
             // #Critical
@@ -52,21 +42,14 @@ namespace IBR
             PhotonNetwork.AutomaticallySyncScene = true;
         }
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-        /// </summary>
         void Start()
         {
-            //Connect();
+ 
         }
-
 
         #endregion
 
-
         #region Public Methods
-
 
         /// <summary>
         /// Start the connection process.
@@ -75,8 +58,7 @@ namespace IBR
         /// </summary>
         public void Connect()
         {
-            //progressLabel.SetActive(true);
-            //controlPanel.SetActive(false);
+
             if (PhotonNetwork.IsConnected)
             {
                 PhotonNetwork.JoinRandomRoom();
@@ -87,7 +69,6 @@ namespace IBR
                 PhotonNetwork.GameVersion = gameVersion;
             }
         }
-
 
         #endregion
 
