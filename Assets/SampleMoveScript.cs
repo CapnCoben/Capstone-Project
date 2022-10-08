@@ -42,11 +42,11 @@ public class SampleMoveScript : MonoBehaviour
 
     float movementAnimator;
 
-    float initialJumpVelocity;
-    float maxJumpHeight;
-    float maxJumpTime;
+    //float initialJumpVelocity;
+    //float maxJumpHeight;
+    //float maxJumpTime;
     public float jumpHeight = 10f;
-    bool isJumping = false;
+    //bool isJumping = false;
     private bool groundedPlayer;
 
     public float gravityScale = -9.81f;
@@ -99,10 +99,10 @@ public class SampleMoveScript : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-       ;
-    }
+    //private void FixedUpdate()
+    //{
+       
+    //}
 
     // Update is called once per frame
     void Update()
@@ -121,12 +121,12 @@ public class SampleMoveScript : MonoBehaviour
         JumpLogic();
     }
 
-    void SetupJump()
-    {
-        float timeToApex = maxJumpTime / 2;
-        gravityScale = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
-        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-    }
+    //void SetupJump()
+    //{
+    //    float timeToApex = maxJumpTime / 2;
+    //    gravityScale = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+    //    initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+    //}
 
     public void PlayerMove(Vector2 magnitude)
     {
@@ -236,6 +236,6 @@ public class CameraMove
 {
     Transform player;
 
-    bool autoRotation;
+    //bool autoRotation;
 
 }
