@@ -39,7 +39,7 @@ public class InfiniteTerrain : MonoBehaviour
 
 		viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
 
-		DontDestroyOnLoad(this.gameObject);
+		//DontDestroyOnLoad(this.gameObject);
 
 	}
 
