@@ -106,7 +106,7 @@ namespace IBR
                 return;
             }
 
-            Health -= 0.1f;
+            //Health -= 0.1f;
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace IBR
                 return;
             }
      
-            Health -= 0.1f * Time.deltaTime;
+            //Health -= 0.1f * Time.deltaTime;
         }
 
 #if !UNITY_5_4_OR_NEWER
