@@ -238,7 +238,4 @@ public class CameraMove
 
     bool autoRotation;
 
-    float rotSpeed = 4f;
-
-
 }

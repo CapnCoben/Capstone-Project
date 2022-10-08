@@ -13,6 +13,7 @@ namespace IBR
 
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
+        
 
         private void Start()
         {
