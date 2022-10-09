@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 6874783083640959427}
   - component: {fileID: 7753071610423850436}
   - component: {fileID: 8146351799964228207}
-  - component: {fileID: 8268567779623601468}
+  - component: {fileID: 6565328985299098921}
   m_Layer: 0
   m_Name: Olivia
   m_TagString: Untagged
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 6864817675409610189}
 --- !u!114 &6864817673793818690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,7 +1570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
-  PlayerUiPrefab: {fileID: 0}
 --- !u!114 &6874783083640959427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,7 +1634,7 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
---- !u!114 &8268567779623601468
+--- !u!114 &6565328985299098921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1644,12 +1643,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6018448045399969799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd08475b23aa548b7b9d28397d430b32, type: 3}
+  m_Script: {fileID: 11500000, guid: e868d88598a1a4d88a78171ba6c473e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 7
   height: 3
-  centerOffset: {x: 0, y: 7, z: 0}
+  centerOffset: {x: 0, y: 0, z: 0}
   followOnStart: 0
   smoothSpeed: 0.125
 --- !u!1 &6555982039541286262
