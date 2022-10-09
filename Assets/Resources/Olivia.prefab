@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 6864817675409610189}
+  m_Camera: {fileID: 0}
 --- !u!114 &6864817673793818690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1610,11 +1610,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e868d88598a1a4d88a78171ba6c473e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7
+  distance: 5
   height: 3
   centerOffset: {x: 0, y: 4, z: 0}
-  followOnStart: 1
-  smoothSpeed: 0.125
+  followOnStart: 0
+  smoothSpeed: 3
 --- !u!114 &8146351799964228207
 MonoBehaviour:
   m_ObjectHideFlags: 0
