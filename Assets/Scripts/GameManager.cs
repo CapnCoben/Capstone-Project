@@ -48,7 +48,7 @@ namespace IBR
             {
                 Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
-                LoadArena();
+                //LoadArena();
             }
         }
 
@@ -62,7 +62,7 @@ namespace IBR
             {
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
                 
-                LoadArena();
+                //LoadArena();
             }
         }
 
@@ -87,7 +87,7 @@ namespace IBR
                 return;
             }
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.PlayerCount);
+            PhotonNetwork.LoadLevel(2);
         }
 
         #endregion

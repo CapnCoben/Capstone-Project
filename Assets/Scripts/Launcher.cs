@@ -114,7 +114,7 @@ namespace IBR
 
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("scene1");
+                PhotonNetwork.LoadLevel("Mesh Scene");
             }
         }
 
