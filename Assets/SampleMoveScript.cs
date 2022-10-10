@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class SampleMoveScript : MonoBehaviour
     SampleCControls inputActions;
 
     public InputAction moveAction;
+    public InputAction rotateRightAction;
+    public InputAction rotateLeftAction;
 
     Vector2 currentMovement;
     Vector3 playerVelocity;
@@ -62,6 +65,7 @@ public class SampleMoveScript : MonoBehaviour
         moveAction.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
         moveAction.canceled += ctx => currentMovement = Vector2.zero;
 
+        rotateRightAction.performed += ctx => ReadStick(ctx);
 
         walkPressed = currentMovement.x >= 0 || currentMovement.y >= 0;
 
@@ -97,6 +101,43 @@ public class SampleMoveScript : MonoBehaviour
         movementAnimator = Animator.StringToHash("Movement");
         animator.SetFloat("Movement", 0);
 
+    }
+
+    public void ReadStick(InputAction.CallbackContext ctx)
+    {
+        Vector2 stickDirection = ctx.ReadValue<Vector2>().normalized;
+
+        RotateRight(stickDirection);
+    }
+
+    private void RotateAim(Vector2 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+    }
+
+    public void RotateRight(Vector2 direction)
+    {
+        Vector3 targetDirection = new Vector3(direction.x, 0, direction.y);
+
+        Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+
+        Vector3 rotation = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * 30, 0.0f);
+
+        transform.rotation = Quaternion.LookRotation(rotation);
+
+    }
+    
+    public void RotateLeft()
+    {
+        Vector3 targetDirection = transform.forward - new Vector3(0, -20, 0);
+
+        Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+
+        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 30).eulerAngles;
+
+        transform.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
 
     //private void FixedUpdate()
@@ -205,12 +246,16 @@ public class SampleMoveScript : MonoBehaviour
     {
         inputActions.Movement.Enable();
         inputActions.Combat.Enable();
+        rotateLeftAction.Enable();
+        rotateRightAction.Enable();
     }
 
     private void OnDisable()
     {
         inputActions.Movement.Disable();
         inputActions.Combat.Disable();
+        rotateLeftAction.Disable();
+        rotateRightAction.Disable();
     }
 
 

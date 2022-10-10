@@ -1372,7 +1372,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6018448045399969799}
-  m_LocalRotation: {x: -0, y: 0.9625651, z: -0, w: 0.27105063}
+  m_LocalRotation: {x: 0, y: 0.9625641, z: 0, w: 0.27105412}
   m_LocalPosition: {x: 3756.49, y: 14.7, z: 951.93}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -1506,22 +1506,40 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
-    - m_Name: left
-      m_Id: b95d8004-bc3e-419c-8f53-cca944e71c7d
+    m_Flags: 0
+  rotateRightAction:
+    m_Name: Rotate Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7dc21d44-da7d-4661-b7cb-1822d0e78ee1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a1597e09-e526-453f-9987-3637c7d5c63a
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 80962d3f-f2a6-42ce-9544-175747702b25
+      m_Action: Rotate Right
+      m_Flags: 0
+    m_Flags: 0
+  rotateLeftAction:
+    m_Name: Rotate Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 691bf050-963b-41ac-9155-6533d540443e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b7312c6d-492a-48d9-a2f1-c5d95e25c693
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Move
-      m_Flags: 8
+      m_Action: Rotate Left
+      m_Flags: 0
     m_Flags: 0
   moveSpeed: 5
   runSpeed: 12
@@ -1776,7 +1794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6864817675409610184
 Transform:
   m_ObjectHideFlags: 0
