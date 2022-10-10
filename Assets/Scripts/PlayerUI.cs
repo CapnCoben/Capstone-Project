@@ -58,7 +58,7 @@ namespace IBR
                 return;
             }
 
-            
+            Debug.Log(playerNameText);
 
         }
 
@@ -99,6 +99,7 @@ namespace IBR
             targetTransform = this.target.GetComponent<Transform>();
             targetRenderer = this.target.GetComponent<Renderer>();
             CharacterController characterController = _target.GetComponent<CharacterController>();
+
             // Get data from the Player that won't change during the lifetime of this Component
             if (characterController != null)
             {
@@ -108,6 +109,7 @@ namespace IBR
             if (playerNameText != null)
             {
                 playerNameText.text = target.photonView.Owner.NickName;
+                
             }
         }
 

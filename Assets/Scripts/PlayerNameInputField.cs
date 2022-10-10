@@ -25,13 +25,13 @@ namespace IBR
 
         #region MonoBehaviour CallBacks
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-        /// </summary>
         void Start()
         {
 
+        }
+
+        void Update()
+        {
 
             string defaultName = string.Empty;
             InputField _inputField = this.GetComponent<InputField>();
@@ -44,8 +44,8 @@ namespace IBR
                 }
             }
 
-
             PhotonNetwork.NickName = defaultName;
+            Debug.Log(PhotonNetwork.NickName);
         }
 
 
