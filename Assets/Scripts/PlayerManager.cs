@@ -13,8 +13,8 @@ namespace IBR
         public static GameObject LocalPlayerInstance;
 
         //[Tooltip("The Player's UI GameObject Prefab")]
-        //[SerializeField]
-        //public GameObject PlayerUiPrefab;
+        [SerializeField]
+        public GameObject PlayerUiPrefab;
 
         #region IPunObservable implementation
 
@@ -72,15 +72,15 @@ namespace IBR
                 Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
             }
 
-            //if (PlayerUiPrefab != null)
-            //{
-            //    GameObject _uiGo = Instantiate(PlayerUiPrefab);
-            //    _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-            //}
-            //else
-            //{
-            //    Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
-            //}
+            if (PlayerUiPrefab != null)
+            {
+                GameObject _uiGo = Instantiate(PlayerUiPrefab);
+                _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+            }
+            else
+            {
+                Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+            }
 
 #if UNITY_5_4_OR_NEWER
             // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
@@ -99,14 +99,14 @@ namespace IBR
         /// MonoBehaviour method called when the Collider 'other' enters the trigger.
         /// Affect Health of the Player if the collider is a deep water.
         /// </summary>
-        void OnTriggerEnter(Collision collision)
+        void OnTriggerEnter(Collider player)
         {
             if (!photonView.IsMine)
             {
                 return;
             }
 
-            if (collision.gameObject.CompareTag("Water"))
+            if (gameObject.CompareTag("Water"))
             {
                 GameManager.Instance.LeaveRoom();
             } 
@@ -145,8 +145,8 @@ void OnLevelWasLoaded(int level)
                 transform.position = new Vector3(3756f, 30f, 951f);
             }
 
-            //GameObject _uiGo = Instantiate(this.PlayerUiPrefab);
-            //_uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+            GameObject _uiGo = Instantiate(this.PlayerUiPrefab);
+            _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
         }
 
 #if UNITY_5_4_OR_NEWER

@@ -18,8 +18,8 @@ namespace IBR
         private PlayerManager target;
 
         //[Tooltip("UI Text to display Player's Name")]
-        //[SerializeField]
-        //private Text playerNameText;
+        [SerializeField]
+        private Text playerNameText;
 
 
         //[Tooltip("UI Slider to display Player's Health")]
@@ -105,10 +105,10 @@ namespace IBR
                 characterControllerHeight = characterController.height;
             }
 
-            //if (playerNameText != null)
-            //{
-            //    playerNameText.text = target.photonView.Owner.NickName;
-            //}
+            if (playerNameText != null)
+            {
+                playerNameText.text = target.photonView.Owner.NickName;
+            }
         }
 
         #endregion
