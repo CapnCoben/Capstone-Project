@@ -90,7 +90,7 @@ namespace IBR
 
         void Update()
         {
-            
+          
         }
 
         #region MonoBehaviour CallBacks
@@ -99,14 +99,17 @@ namespace IBR
         /// MonoBehaviour method called when the Collider 'other' enters the trigger.
         /// Affect Health of the Player if the collider is a deep water.
         /// </summary>
-        void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collision collision)
         {
             if (!photonView.IsMine)
             {
                 return;
             }
 
-            //Health -= 0.1f;
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                GameManager.Instance.LeaveRoom();
+            } 
         }
 
         /// <summary>
@@ -114,16 +117,16 @@ namespace IBR
         /// We're going to affect health when the player enters the deep water. 
         /// </summary>
         /// <param name="other">Other.</param>
-        void OnTriggerStay(Collider other)
-        {
-            // we dont' do anything if we are not the local player.
-            if (!photonView.IsMine)
-            {
-                return;
-            }
-     
-            //Health -= 0.1f * Time.deltaTime;
-        }
+        //void OnTriggerStay(Collider Water)
+        //{
+        //    // we dont' do anything if we are not the local player.
+        //    if (!photonView.IsMine)
+        //    {
+        //        return;
+        //    }
+
+        //    //Health -= 0.1f * Time.deltaTime;
+        //}
 
 #if !UNITY_5_4_OR_NEWER
 /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
