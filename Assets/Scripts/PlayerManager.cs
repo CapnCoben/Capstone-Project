@@ -99,15 +99,15 @@ namespace IBR
         /// MonoBehaviour method called when the Collider 'other' enters the trigger.
         /// Affect Health of the Player if the collider is a deep water.
         /// </summary>
-        void OnTriggerEnter(Collider player)
+        void OnCollisionEnter(Collision collision)
         {
             if (!photonView.IsMine)
             {
                 return;
             }
 
-            if (gameObject.CompareTag("Water"))
-            {
+            if (collision.gameObject.CompareTag("Water"))
+                {
                 GameManager.Instance.LeaveRoom();
             } 
         }
