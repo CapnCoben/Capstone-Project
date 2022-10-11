@@ -1483,7 +1483,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: WASD
-      m_Id: 89c2c1b4-3e16-4af2-b877-2082ce96d76a
+      m_Id: e3895fe6-4f7d-49a0-bfb2-c944c0703b83
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -1491,16 +1491,32 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 4
     - m_Name: up
-      m_Id: 7b272925-bdbc-4872-a95e-dd994d8d8b20
-      m_Path: <Keyboard>/#(W)
+      m_Id: a038c51d-3d28-4725-9153-231dcae22dcb
+      m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Move
       m_Flags: 8
     - m_Name: down
-      m_Id: 6b666173-1ed0-46ac-9415-55e8945a2cd4
+      m_Id: 2523de9e-e6ba-4116-a2e1-3d562f9d3def
       m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 10d18d6f-4135-435e-ab17-212cfc22d490
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: de7e55bb-e8b9-40a8-973d-b9114e021bb6
+      m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -1514,15 +1530,7 @@ MonoBehaviour:
     m_Id: 7dc21d44-da7d-4661-b7cb-1822d0e78ee1
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a1597e09-e526-453f-9987-3637c7d5c63a
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Rotate Right
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
   rotateLeftAction:
     m_Name: Rotate Left
@@ -1531,19 +1539,10 @@ MonoBehaviour:
     m_Id: 691bf050-963b-41ac-9155-6533d540443e
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: b7312c6d-492a-48d9-a2f1-c5d95e25c693
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Rotate Left
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
   moveSpeed: 5
   runSpeed: 12
-  turnSpeed: 45
   groundCheck: {fileID: 6864817674867798053}
   groundMask:
     serializedVersion: 2
