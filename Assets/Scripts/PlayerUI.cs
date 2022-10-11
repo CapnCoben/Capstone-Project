@@ -45,7 +45,7 @@ namespace IBR
 
         void Update()
         {
-            //Reflect the Player Health
+            //Reflect the Player Health - For future development
             //if (playerHealthSlider != null)
             //{
             //    playerHealthSlider.value = target.Health;
@@ -58,7 +58,7 @@ namespace IBR
                 return;
             }
 
-            Debug.Log(playerNameText);
+            //Debug.Log(playerNameText);
 
         }
 
