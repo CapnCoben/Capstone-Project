@@ -1543,6 +1543,7 @@ MonoBehaviour:
     m_Flags: 0
   moveSpeed: 5
   runSpeed: 12
+  turnSpeed: 45
   groundCheck: {fileID: 6864817674867798053}
   groundMask:
     serializedVersion: 2
@@ -1794,7 +1795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6864817675409610184
 Transform:
   m_ObjectHideFlags: 0
