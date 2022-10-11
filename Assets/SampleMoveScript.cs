@@ -25,7 +25,7 @@ public class SampleMoveScript : MonoBehaviour
 
     public float moveSpeed = 3;
     public float runSpeed = 8;
-
+  
     CharacterController cc;
 
     float horizontalInput;
@@ -45,11 +45,7 @@ public class SampleMoveScript : MonoBehaviour
 
     float movementAnimator;
 
-    //float initialJumpVelocity;
-    //float maxJumpHeight;
-    //float maxJumpTime;
     public float jumpHeight = 10f;
-    //bool isJumping = false;
     private bool groundedPlayer;
 
     public float gravityScale = -9.81f;
@@ -140,11 +136,6 @@ public class SampleMoveScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
 
-    //private void FixedUpdate()
-    //{
-       
-    //}
-
     // Update is called once per frame
     void Update()
     {
@@ -159,21 +150,15 @@ public class SampleMoveScript : MonoBehaviour
         {
             PlayerMove(currentMovement);
         }
+
         JumpLogic();
     }
-
-    //void SetupJump()
-    //{
-    //    float timeToApex = maxJumpTime / 2;
-    //    gravityScale = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
-    //    initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-    //}
 
     public void PlayerMove(Vector2 magnitude)
     {
         horizontalInput = magnitude.x;
         verticalInput = magnitude.y;
-
+        
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -181,9 +166,7 @@ public class SampleMoveScript : MonoBehaviour
         moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
 
         float speed = runPressed ? runSpeed : moveSpeed;
-        transform.position += moveDir * speed * Time.deltaTime;
-        
-        //playerVelocity.y += gravityScale * Time.deltaTime;
+        transform.position += moveDir * speed * Time.deltaTime; 
     }
 
     private void JumpLogic()
@@ -258,29 +241,9 @@ public class SampleMoveScript : MonoBehaviour
         rotateRightAction.Disable();
     }
 
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        groundedPlayer = true;
-
-    //        Debug.Log("On Ground");
-    //    }
-    //    //else if (collision.gameObject.CompareTag("Water"))
-    //    //{
-    //    //    Debug.Log("Game Over!");
-    //    //    gameOver = true;
-    //    //    playerAnim.SetBool("Death_b", true);
-    //    //    playerAnim.SetInteger("DeathType_int", 1);
-    //    //}
-    //}
 }
 
 public class CameraMove
 {
     Transform player;
-
-    //bool autoRotation;
-
 }
