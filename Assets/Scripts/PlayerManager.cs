@@ -108,6 +108,7 @@ namespace IBR
 
             if (collision.gameObject.CompareTag("Water"))
                 {
+                Debug.Log("GAME OVER!");
                 GameManager.Instance.LeaveRoom();
             } 
         }
