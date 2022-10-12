@@ -21,7 +21,7 @@ namespace IBR
             if (PlayerManager.LocalPlayerInstance == null)
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                // We're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(3756f, 30f, 951f), Quaternion.identity, 0);
             }
             else
@@ -35,6 +35,7 @@ namespace IBR
         /// <summary>
         /// Called when the local player left the room. We need to load the launcher scene.
         /// </summary>
+        
         public override void OnLeftRoom()
         {
             SceneManager.LoadScene(0);
@@ -70,6 +71,8 @@ namespace IBR
 
         #region Public Methods
 
+        // Return to main menu
+
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
@@ -79,7 +82,7 @@ namespace IBR
 
         #region Private Methods
 
-        /// to be used in the future for further level development. 
+        /// To be used in the future for further level development / game modes. 
 
         //void LoadArena()
         //{
