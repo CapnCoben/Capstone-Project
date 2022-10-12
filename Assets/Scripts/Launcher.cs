@@ -42,11 +42,6 @@ namespace IBR
             PhotonNetwork.AutomaticallySyncScene = true;
         }
 
-        void Start()
-        {
- 
-        }
-
         #endregion
 
         #region Public Methods
@@ -110,7 +105,6 @@ namespace IBR
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 Debug.Log("We load the 'Island Battle Royale' ");
-
 
                 // #Critical
                 // Load the Room Level.
