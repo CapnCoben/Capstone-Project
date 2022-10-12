@@ -15,14 +15,12 @@ namespace IBR
 
         PlayerSelectedState playerSelection;
 
-
         public void Select()
         {
             selectedCharacter.gameObject.SetActive(true);
 
             CharacterSelection.Instance.SelectNewCharacter(characterValue);
         }
-
     }
 
     public enum PlayerSelectedState
