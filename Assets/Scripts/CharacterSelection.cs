@@ -4,12 +4,15 @@ using UnityEngine;
 
 namespace IBR
 {
+    /// <summary>
+    /// CharacterSelection. Future development will add more characters.
+    /// This will be used to store the selection and then use it in GameManager to instantiate in the game.
+    /// </summary>
     public class CharacterSelection : MonoBehaviour
     {
         public static CharacterSelection Instance;
         public List<GameObject> Players;
         public int selectedCharacterValue;
-
 
         private void Awake()
         {
@@ -26,11 +29,6 @@ namespace IBR
         void Start()
         {
             PlayerPrefs.SetInt("selectedCharacter", selectedCharacterValue);
-        }
-
-        void Update()
-        {
-            
         }
 
         public void SelectNewCharacter(int characterValue)
