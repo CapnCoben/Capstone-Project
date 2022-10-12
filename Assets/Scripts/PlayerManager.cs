@@ -88,10 +88,6 @@ namespace IBR
 #endif
         }
 
-        void Update()
-        {
-          
-        }
 
         #region MonoBehaviour CallBacks
 
@@ -114,10 +110,11 @@ namespace IBR
         }
 
         /// <summary>
+        /// To be used in future development.
         /// MonoBehaviour method called once per frame for every Collider 'other' that is touching the trigger.
-        /// We're going to affect health when the player enters the deep water. 
+        /// We're going to affect health when the player enters the deep water or is hit by another player 
         /// </summary>
-        /// <param name="other">Other.</param>
+        /// <param name="Water">Water.</param>
         //void OnTriggerStay(Collider Water)
         //{
         //    // we dont' do anything if we are not the local player.
