@@ -5,14 +5,11 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 namespace IBR
 {
     public class SampleMoveScript : MonoBehaviourPun
     {
         Animator animator;
-
-        //PhotonView PhotonView;
 
         private Rigidbody playerRB;
 
@@ -54,13 +51,11 @@ namespace IBR
 
         public float jumpHeight = 10f;
         private bool groundedPlayer;
-
         public float gravityScale = -9.81f;
         public float gravityModifyer;
 
         private void Awake()
         {
-          
             inputActions = new SampleCControls();
 
             moveAction = inputActions.Movement.Move;
@@ -84,10 +79,8 @@ namespace IBR
             inputActions.Combat.Kick.performed += ctx => kickPressed = true;
             inputActions.Combat.Kick.canceled += ctx => kickPressed = false;
 
-            //SetupJump();
         }
 
-        // Start is called before the first frame update
         void Start()
         {
             cc = GetComponent<CharacterController>();
@@ -143,9 +136,9 @@ namespace IBR
             transform.rotation = Quaternion.Euler(0, rotation.y, 0);
         }
 
-        // Update is called once per frame
         void Update()
         {
+            // if (photonView.IsMine prevents other user input from affecting your character
 
             if (photonView.IsMine)
             {
@@ -162,8 +155,7 @@ namespace IBR
                 }
 
                 JumpLogic();
-            }
-            
+            }  
         }
 
         public void PlayerMove(Vector2 magnitude)
@@ -197,7 +189,6 @@ namespace IBR
             if (walkPressed)
             {
                 animator.SetFloat("Movement", movementAnimator);
-                //Debug.Log(movementAnimator);
             }
             bool isRunning = animator.GetBool(isRunningHash);
             bool isWalking = animator.GetBool(isWalkingHash);
@@ -234,7 +225,6 @@ namespace IBR
             {
                 animator.SetBool(kickHash, false);
             }
-
         }
 
         private void OnEnable()
