@@ -2,6 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Creates procedural level generation. Future development will allow the ground to move. 
+/// </summary>
+///
+
 public class InfiniteTerrain : MonoBehaviour
 {
 
@@ -29,8 +34,6 @@ public class InfiniteTerrain : MonoBehaviour
     {
 		mapGenerator = FindObjectOfType<MapGenerator>();
 
-		//Debug.Log("mapGenerator is " + mapGenerator);
-
 		maxViewDst = detailLevels[detailLevels.Length - 1].visibleDstThreshold;
 		chunkSize = MapGenerator.mapChunkSize - 1;
 		chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
@@ -38,21 +41,15 @@ public class InfiniteTerrain : MonoBehaviour
 		UpdateVisibleChunks();
 
 		viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
-
-		//DontDestroyOnLoad(this.gameObject);
-
 	}
 
 	void Update()
 	{
-		//viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
-
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate)
 		{
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks();
 		}
-
 	}
 
 	void UpdateVisibleChunks()
@@ -109,7 +106,6 @@ public class InfiniteTerrain : MonoBehaviour
 
 		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material)
 		{
-			//Debug.Log("Creating Terrain Chunk");
 			this.detailLevels = detailLevels;
 
 			position = coord * size;
@@ -122,7 +118,6 @@ public class InfiniteTerrain : MonoBehaviour
 			meshCollider = meshObject.AddComponent<MeshCollider>();
 			meshRenderer.material = material;
 			ground = LayerMask.NameToLayer("Ground");
-
 
 			meshObject.transform.position = positionV3 * scale;
 			meshObject.transform.parent = parent;
@@ -154,8 +149,6 @@ public class InfiniteTerrain : MonoBehaviour
 
 			UpdateTerrainChunk();
 		}
-
-
 
 		public void UpdateTerrainChunk()
 		{
@@ -214,8 +207,6 @@ public class InfiniteTerrain : MonoBehaviour
 
 		public void SetVisible(bool visible)
 		{
-			//Debug.Log(meshObject);
-
 			meshObject.SetActive(visible);
 		}
 
@@ -263,7 +254,6 @@ public class InfiniteTerrain : MonoBehaviour
 		public int lod;
 		public float visibleDstThreshold;
 		public bool useForCollider;
-
 	}
 
 }
