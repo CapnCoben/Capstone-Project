@@ -15,20 +15,12 @@ namespace IBR
     {
         #region Private Constants
 
-
         // Store the PlayerPref Key to avoid typos
         const string playerNamePrefKey = "PlayerName";
 
-
         #endregion
 
-
         #region MonoBehaviour CallBacks
-
-        void Start()
-        {
-
-        }
 
         void Update()
         {
@@ -48,12 +40,10 @@ namespace IBR
             Debug.Log(PhotonNetwork.NickName);
         }
 
-
         #endregion
 
 
         #region Public Methods
-
 
         /// <summary>
         /// Sets the name of the player, and save it in the PlayerPrefs for future sessions.
@@ -72,7 +62,6 @@ namespace IBR
 
             PlayerPrefs.SetString(playerNamePrefKey, value);
         }
-
 
         #endregion
     }
