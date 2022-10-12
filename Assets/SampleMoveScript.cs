@@ -1,249 +1,263 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class SampleMoveScript : MonoBehaviour
+
+
+namespace IBR
 {
-    Animator animator;
-
-    private Rigidbody playerRB;
-
-    int isWalkingHash;
-    int isRunningHash;
-    int punchHash;
-    int kickHash;
-
-    SampleCControls inputActions;
-
-    public InputAction moveAction;
-    public InputAction rotateRightAction;
-    public InputAction rotateLeftAction;
-
-    Vector2 currentMovement;
-    Vector3 playerVelocity;
-
-    public float moveSpeed = 3;
-    public float runSpeed = 8;
-  
-    CharacterController cc;
-
-    float horizontalInput;
-    float verticalInput;
-
-    public Transform groundCheck;
-    float groundDistance = .5f;
-    public LayerMask groundMask;
-
-    Vector3 moveDir;
-
-    bool walkPressed;
-    bool runPressed;
-    bool jumpPressed;
-    bool punchPressed;
-    bool kickPressed;
-
-    float movementAnimator;
-
-    public float jumpHeight = 10f;
-    private bool groundedPlayer;
-
-    public float gravityScale = -9.81f;
-    public float gravityModifyer;
-
-    private void Awake()
+    public class SampleMoveScript : MonoBehaviourPunCallbacks
     {
+        Animator animator;
 
-        inputActions = new SampleCControls();
+        //PhotonView PhotonView;
 
-        moveAction = inputActions.Movement.Move;
+        private Rigidbody playerRB;
 
-        moveAction.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
-        moveAction.canceled += ctx => currentMovement = Vector2.zero;
+        int isWalkingHash;
+        int isRunningHash;
+        int punchHash;
+        int kickHash;
 
-        rotateRightAction.performed += ctx => ReadStick(ctx);
+        SampleCControls inputActions;
 
-        walkPressed = currentMovement.x >= 0 || currentMovement.y >= 0;
+        public InputAction moveAction;
+        public InputAction rotateRightAction;
+        public InputAction rotateLeftAction;
 
-        inputActions.Movement.Jump.performed += ctx => jumpPressed = true;
-        inputActions.Movement.Jump.canceled += ctx => jumpPressed = false;
+        Vector2 currentMovement;
+        Vector3 playerVelocity;
 
-        inputActions.Movement.Run.performed += ctx => runPressed = true;
-        inputActions.Movement.Run.canceled += ctx => runPressed = false;
+        public float moveSpeed = 3;
+        public float runSpeed = 8;
 
-        inputActions.Combat.Punck.performed += ctx => punchPressed = true;
-        inputActions.Combat.Punck.canceled += ctx => punchPressed = false;
-        
-        inputActions.Combat.Kick.performed += ctx => kickPressed = true;
-        inputActions.Combat.Kick.canceled += ctx => kickPressed = false;
+        CharacterController cc;
 
-        //SetupJump();
-    }
+        float horizontalInput;
+        float verticalInput;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cc = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-        Physics.gravity *= gravityModifyer;
+        public Transform groundCheck;
+        float groundDistance = .5f;
+        public LayerMask groundMask;
 
-        playerRB = GetComponent<Rigidbody>();
+        Vector3 moveDir;
 
-        isWalkingHash = Animator.StringToHash("isWalking");
-        isRunningHash = Animator.StringToHash("isRunning");
-        punchHash = Animator.StringToHash("Punch");
-        kickHash = Animator.StringToHash("Kick");
+        bool walkPressed;
+        bool runPressed;
+        bool jumpPressed;
+        bool punchPressed;
+        bool kickPressed;
 
-        movementAnimator = Animator.StringToHash("Movement");
-        animator.SetFloat("Movement", 0);
+        float movementAnimator;
 
-    }
+        public float jumpHeight = 10f;
+        private bool groundedPlayer;
 
-    public void ReadStick(InputAction.CallbackContext ctx)
-    {
-        Vector2 stickDirection = ctx.ReadValue<Vector2>().normalized;
+        public float gravityScale = -9.81f;
+        public float gravityModifyer;
 
-        RotateRight(stickDirection);
-    }
-
-    private void RotateAim(Vector2 direction)
-    {
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-    }
-
-    public void RotateRight(Vector2 direction)
-    {
-        Vector3 targetDirection = new Vector3(direction.x, 0, direction.y);
-
-        Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
-
-        Vector3 rotation = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * 30, 0.0f);
-
-        transform.rotation = Quaternion.LookRotation(rotation);
-
-    }
-    
-    public void RotateLeft()
-    {
-        Vector3 targetDirection = transform.forward - new Vector3(0, -20, 0);
-
-        Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
-
-        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 30).eulerAngles;
-
-        transform.rotation = Quaternion.Euler(0, rotation.y, 0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        movementAnimator = currentMovement.magnitude;
-        AnimatorLogic();
-        RaycastHit hit;
-        if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundDistance, groundMask))
+        private void Awake()
         {
-            groundedPlayer = true;
-        }
-        if (moveAction.IsPressed())
-        {
-            PlayerMove(currentMovement);
+          
+            inputActions = new SampleCControls();
+
+            moveAction = inputActions.Movement.Move;
+
+            moveAction.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
+            moveAction.canceled += ctx => currentMovement = Vector2.zero;
+
+            rotateRightAction.performed += ctx => ReadStick(ctx);
+
+            walkPressed = currentMovement.x >= 0 || currentMovement.y >= 0;
+
+            inputActions.Movement.Jump.performed += ctx => jumpPressed = true;
+            inputActions.Movement.Jump.canceled += ctx => jumpPressed = false;
+
+            inputActions.Movement.Run.performed += ctx => runPressed = true;
+            inputActions.Movement.Run.canceled += ctx => runPressed = false;
+
+            inputActions.Combat.Punck.performed += ctx => punchPressed = true;
+            inputActions.Combat.Punck.canceled += ctx => punchPressed = false;
+
+            inputActions.Combat.Kick.performed += ctx => kickPressed = true;
+            inputActions.Combat.Kick.canceled += ctx => kickPressed = false;
+
+            //SetupJump();
         }
 
-        JumpLogic();
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            cc = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
+            Physics.gravity *= gravityModifyer;
 
-    public void PlayerMove(Vector2 magnitude)
-    {
-        horizontalInput = magnitude.x;
-        verticalInput = magnitude.y;
-        
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
-        moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
+            playerRB = GetComponent<Rigidbody>();
 
-        float speed = runPressed ? runSpeed : moveSpeed;
-        transform.position += moveDir * speed * Time.deltaTime; 
-    }
+            isWalkingHash = Animator.StringToHash("isWalking");
+            isRunningHash = Animator.StringToHash("isRunning");
+            punchHash = Animator.StringToHash("Punch");
+            kickHash = Animator.StringToHash("Kick");
 
-    private void JumpLogic()
-    {
-        if(jumpPressed && groundedPlayer == true)
-        {
-            playerRB.AddForce((Vector3.up * jumpHeight), ForceMode.Impulse);
-            groundedPlayer = false;
-            animator.SetTrigger("Jump");
-        }
-        
-    }
+            movementAnimator = Animator.StringToHash("Movement");
+            animator.SetFloat("Movement", 0);
 
-    private void AnimatorLogic()
-    {
-        if (walkPressed)
-        {
-            animator.SetFloat("Movement", movementAnimator);
-            //Debug.Log(movementAnimator);
         }
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool isWalking = animator.GetBool(isWalkingHash);
-        bool punching = animator.GetBool(punchHash);
-        bool kicking = animator.GetBool(kickHash);
 
-        if ((runPressed) && !isRunning)
+        public void ReadStick(InputAction.CallbackContext ctx)
         {
-            animator.SetBool(isRunningHash, true);
+            Vector2 stickDirection = ctx.ReadValue<Vector2>().normalized;
+
+            RotateRight(stickDirection);
         }
-        if ((!runPressed && isRunning))
+
+        private void RotateAim(Vector2 direction)
         {
-            animator.SetBool(isRunningHash, false);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
         }
-        if (punchPressed)
+
+        public void RotateRight(Vector2 direction)
         {
-            if (!punching && groundedPlayer)
+            Vector3 targetDirection = new Vector3(direction.x, 0, direction.y);
+
+            Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+
+            Vector3 rotation = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * 30, 0.0f);
+
+            transform.rotation = Quaternion.LookRotation(rotation);
+
+        }
+
+        public void RotateLeft()
+        {
+            Vector3 targetDirection = transform.forward - new Vector3(0, -20, 0);
+
+            Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+
+            Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 30).eulerAngles;
+
+            transform.rotation = Quaternion.Euler(0, rotation.y, 0);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+            if (photonView.IsMine)
             {
-                animator.SetBool(punchHash, true);
+                movementAnimator = currentMovement.magnitude;
+                AnimatorLogic();
+                RaycastHit hit;
+                if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundDistance, groundMask))
+                {
+                    groundedPlayer = true;
+                }
+                if (moveAction.IsPressed())
+                {
+                    PlayerMove(currentMovement);
+                }
+
+                JumpLogic();
             }
+            
         }
-        if (!punchPressed)
+
+        public void PlayerMove(Vector2 magnitude)
         {
-            animator.SetBool(punchHash, false);
-        }
-        if (kickPressed)
-        {
-            if (!kicking && groundedPlayer)
+            horizontalInput = magnitude.x;
+            verticalInput = magnitude.y;
+
+            if (groundedPlayer && playerVelocity.y < 0)
             {
-                animator.SetBool(kickHash, true);
+                playerVelocity.y = 0f;
             }
+            moveDir = verticalInput * transform.forward + horizontalInput * transform.right;
+
+            float speed = runPressed ? runSpeed : moveSpeed;
+            transform.position += moveDir * speed * Time.deltaTime;
         }
-        if (!kickPressed)
+
+        private void JumpLogic()
         {
-            animator.SetBool(kickHash, false);
+            if (jumpPressed && groundedPlayer == true)
+            {
+                playerRB.AddForce((Vector3.up * jumpHeight), ForceMode.Impulse);
+                groundedPlayer = false;
+                animator.SetTrigger("Jump");
+            }
+
+        }
+
+        private void AnimatorLogic()
+        {
+            if (walkPressed)
+            {
+                animator.SetFloat("Movement", movementAnimator);
+                //Debug.Log(movementAnimator);
+            }
+            bool isRunning = animator.GetBool(isRunningHash);
+            bool isWalking = animator.GetBool(isWalkingHash);
+            bool punching = animator.GetBool(punchHash);
+            bool kicking = animator.GetBool(kickHash);
+
+            if ((runPressed) && !isRunning)
+            {
+                animator.SetBool(isRunningHash, true);
+            }
+            if ((!runPressed && isRunning))
+            {
+                animator.SetBool(isRunningHash, false);
+            }
+            if (punchPressed)
+            {
+                if (!punching && groundedPlayer)
+                {
+                    animator.SetBool(punchHash, true);
+                }
+            }
+            if (!punchPressed)
+            {
+                animator.SetBool(punchHash, false);
+            }
+            if (kickPressed)
+            {
+                if (!kicking && groundedPlayer)
+                {
+                    animator.SetBool(kickHash, true);
+                }
+            }
+            if (!kickPressed)
+            {
+                animator.SetBool(kickHash, false);
+            }
+
+        }
+
+        private void OnEnable()
+        {
+            inputActions.Movement.Enable();
+            inputActions.Combat.Enable();
+            rotateLeftAction.Enable();
+            rotateRightAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            inputActions.Movement.Disable();
+            inputActions.Combat.Disable();
+            rotateLeftAction.Disable();
+            rotateRightAction.Disable();
         }
 
     }
 
-    private void OnEnable()
+    public class CameraMove
     {
-        inputActions.Movement.Enable();
-        inputActions.Combat.Enable();
-        rotateLeftAction.Enable();
-        rotateRightAction.Enable();
+        Transform player;
     }
 
-    private void OnDisable()
-    {
-        inputActions.Movement.Disable();
-        inputActions.Combat.Disable();
-        rotateLeftAction.Disable();
-        rotateRightAction.Disable();
-    }
-
-}
-
-public class CameraMove
-{
-    Transform player;
 }
