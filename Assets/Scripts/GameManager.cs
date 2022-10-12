@@ -79,16 +79,18 @@ namespace IBR
 
         #region Private Methods
 
-        void LoadArena()
-        {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-                return;
-            }
-            Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel(2);
-        }
+        /// to be used in the future for further level development. 
+
+        //void LoadArena()
+        //{
+        //    if (!PhotonNetwork.IsMasterClient)
+        //    {
+        //        Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+        //        return;
+        //    }
+        //    Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
+        //    PhotonNetwork.LoadLevel(2);
+        //}
 
         #endregion
     }
