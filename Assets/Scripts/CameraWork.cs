@@ -48,7 +48,6 @@ namespace IBR
 		// Cache for camera offset
 		Vector3 cameraOffset = Vector3.zero;
 
-
 		#endregion
 
 		#region MonoBehaviour Callbacks
@@ -64,7 +63,6 @@ namespace IBR
 				OnStartFollowing();
 			}
 		}
-
 
 		void LateUpdate()
 		{
@@ -115,7 +113,6 @@ namespace IBR
 			cameraTransform.LookAt(this.transform.position + centerOffset);
 
 		}
-
 
 		void Cut()
 		{
