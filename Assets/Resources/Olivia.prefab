@@ -1548,7 +1548,7 @@ MonoBehaviour:
     m_Bits: 1
   jumpHeight: 20
   gravityScale: -9.81
-  gravityModifyer: 0
+  gravityModifyer: 2
 --- !u!114 &5346281332506126070
 MonoBehaviour:
   m_ObjectHideFlags: 0
