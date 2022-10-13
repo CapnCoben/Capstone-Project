@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace IBR
 {
-    public class SampleMoveScript : MonoBehaviourPun
+    public class PlayerMover : MonoBehaviourPun
     {
         Animator animator;
 

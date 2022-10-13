@@ -1476,13 +1476,13 @@ MonoBehaviour:
   moveAction:
     m_Name: Move
     m_Type: 0
-    m_ExpectedControlType: Vector2
-    m_Id: 795e6d98-4a90-4fa5-ba91-53c653bfe489
+    m_ExpectedControlType: 
+    m_Id: ca66f376-b069-4b37-b081-ec1ca045f4a3
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: WASD
-      m_Id: e3895fe6-4f7d-49a0-bfb2-c944c0703b83
+    - m_Name: 2D Vector
+      m_Id: a5d88702-63a5-47d1-9384-ca94c231b398
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -1490,7 +1490,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 4
     - m_Name: up
-      m_Id: a038c51d-3d28-4725-9153-231dcae22dcb
+      m_Id: aa53b02a-1ed1-4fc1-8d91-25e5015d81f1
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
@@ -1498,7 +1498,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: down
-      m_Id: 2523de9e-e6ba-4116-a2e1-3d562f9d3def
+      m_Id: 5cb3b497-0f59-4b77-8bb4-5606d429b450
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
@@ -1506,7 +1506,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: left
-      m_Id: 10d18d6f-4135-435e-ab17-212cfc22d490
+      m_Id: dfda9dd7-e387-4d38-af03-38a408c5d112
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
@@ -1514,7 +1514,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: right
-      m_Id: de7e55bb-e8b9-40a8-973d-b9114e021bb6
+      m_Id: 226dcfb1-28ea-4b69-9770-ee34dd8b66f6
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
@@ -1526,7 +1526,7 @@ MonoBehaviour:
     m_Name: Rotate Right
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 7dc21d44-da7d-4661-b7cb-1822d0e78ee1
+    m_Id: 72f01053-d5c7-401f-897f-dcec468a3bf2
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1535,20 +1535,20 @@ MonoBehaviour:
     m_Name: Rotate Left
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 691bf050-963b-41ac-9155-6533d540443e
+    m_Id: 6a3fbbc9-71c4-4434-a58b-c8ff4868c6e3
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  moveSpeed: 5
-  runSpeed: 12
+  moveSpeed: 3
+  runSpeed: 8
   groundCheck: {fileID: 6864817674867798053}
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1
   jumpHeight: 20
-  gravityScale: 2
-  gravityModifyer: 1.2
+  gravityScale: -9.81
+  gravityModifyer: 0
 --- !u!114 &5346281332506126070
 MonoBehaviour:
   m_ObjectHideFlags: 0
