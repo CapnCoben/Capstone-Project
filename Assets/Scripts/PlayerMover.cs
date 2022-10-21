@@ -11,6 +11,8 @@ namespace IBR
     {
         Animator animator;
 
+        public ParticleSystem dust;
+
         private Rigidbody playerRB;
 
         int isWalkingHash;
@@ -140,8 +142,8 @@ namespace IBR
         {
             // if (photonView.IsMine prevents other user input from affecting your character
 
-            if (photonView.IsMine)
-            {
+            //if (photonView.IsMine)
+            //{
                 movementAnimator = currentMovement.magnitude;
                 AnimatorLogic();
                 RaycastHit hit;
@@ -153,9 +155,8 @@ namespace IBR
                 {
                     PlayerMove(currentMovement);
                 }
-
                 JumpLogic();
-            }  
+            //}  
         }
 
         public void PlayerMove(Vector2 magnitude)
@@ -198,6 +199,7 @@ namespace IBR
             if ((runPressed) && !isRunning)
             {
                 animator.SetBool(isRunningHash, true);
+                dust.Play();
             }
             if ((!runPressed && isRunning))
             {

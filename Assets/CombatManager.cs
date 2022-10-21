@@ -9,15 +9,20 @@ public class CombatManager: MonoBehaviour
 
     public float hitMultiplyer;
 
+    private ParticleSystem impactEffect;
     private void Start()
     {
         damage = 0;
+
     }
     private void OnTriggerEnter(Collider other)
     {
        if(other.tag == "Player")
         {
             ApplyDamage(other);
+
+            impactEffect = other.GetComponentInChildren<ParticleSystem>();
+            impactEffect.Play();
         }
     }
 
