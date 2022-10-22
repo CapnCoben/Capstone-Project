@@ -37,7 +37,7 @@ namespace IBR
             }
 
             PhotonNetwork.NickName = defaultName;
-            Debug.Log(PhotonNetwork.NickName);
+            //Debug.Log(PhotonNetwork.NickName);
         }
 
         #endregion
