@@ -1473,6 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ca7bc55f45d7444bfe4d74c2d367e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dust: {fileID: 0}
   moveAction:
     m_Name: Move
     m_Type: 0
