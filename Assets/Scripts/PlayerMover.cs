@@ -19,6 +19,7 @@ namespace IBR
         int isRunningHash;
         int punchHash;
         int kickHash;
+        int dodgeHash;
 
         SampleCControls inputActions;
 
@@ -48,6 +49,7 @@ namespace IBR
         bool jumpPressed;
         bool punchPressed;
         bool kickPressed;
+        bool dodgePressed;
 
         float movementAnimator;
 
@@ -81,6 +83,9 @@ namespace IBR
             inputActions.Combat.Kick.performed += ctx => kickPressed = true;
             inputActions.Combat.Kick.canceled += ctx => kickPressed = false;
 
+            inputActions.Combat.Dodge.performed += ctx => dodgePressed = true;
+            inputActions.Combat.Dodge.canceled += ctx => dodgePressed = false;
+
         }
 
         void Start()
@@ -95,6 +100,7 @@ namespace IBR
             isRunningHash = Animator.StringToHash("isRunning");
             punchHash = Animator.StringToHash("Punch");
             kickHash = Animator.StringToHash("Kick");
+            dodgeHash = Animator.StringToHash("Dodge");
 
             movementAnimator = Animator.StringToHash("Movement");
             animator.SetFloat("Movement", 0);
@@ -145,7 +151,6 @@ namespace IBR
             //if (photonView.IsMine)
             //{
                 movementAnimator = currentMovement.magnitude;
-                AnimatorLogic();
                 RaycastHit hit;
                 if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundDistance, groundMask))
                 {
@@ -156,6 +161,7 @@ namespace IBR
                     PlayerMove(currentMovement);
                 }
                 JumpLogic();
+                AnimatorLogic();
             //}  
         }
 
@@ -195,6 +201,7 @@ namespace IBR
             bool isWalking = animator.GetBool(isWalkingHash);
             bool punching = animator.GetBool(punchHash);
             bool kicking = animator.GetBool(kickHash);
+            bool isDodging = animator.GetBool(dodgeHash);
 
             if ((runPressed) && !isRunning)
             {
@@ -226,6 +233,17 @@ namespace IBR
             if (!kickPressed)
             {
                 animator.SetBool(kickHash, false);
+            }
+            if (dodgePressed) 
+            {
+                if(!isDodging && groundedPlayer && moveDir.x <=0 && moveDir.z >= 0) // allows dodge only if walking backwards
+                {
+                    animator.SetBool(dodgeHash, true);
+                }
+            }
+            if (!dodgePressed)
+            {
+                animator.SetBool(dodgeHash, false);
             }
         }
 
